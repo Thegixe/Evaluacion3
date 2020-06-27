@@ -22,7 +22,7 @@ public class Paciente {
         conexion = new Conexion();
     }
 
-    public Paciente(String usuario, String password, String nombre, String apellido, String especialidad) throws ClassNotFoundException, SQLException {
+    public Paciente(String usuario, String password, String nombre, String apellido, String rut) throws ClassNotFoundException, SQLException {
         this.usuario = usuario;
         this.password = password;
         this.nombre = nombre;
