@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 27-jun-2020, 17:27:58
+    Document   : sesionM
+    Created on : 27-jun-2020, 18:53:45
     Author     : TheGixe
 --%>
 
@@ -12,8 +12,8 @@
         <title>Inicio</title>
     </head>
     <body><center>
-        <h1>Inicio de sesion</h1>
-        <form action="ControlPaciente" method="post">
+        <h1>Sesion Medica</h1>
+        <form action="ControlMedico" method="post">
             
                 <table style="border: 1; ">
                    
@@ -26,13 +26,12 @@
                         <td><input type="password" name="password"/></td>
                     </tr>
                     <tr>
-                        <td><a href="registroPaciente.jsp">Registrar</a></td>
+                        <td><a href="registroMedico.jsp">Registrar</a></td>
                         <td><input type="submit" value="Ingresar"/></td>
                         <input type="hidden" name="accion" value="2"/>
                     </tr>
                 </table>
             <br>
-            <a href="sesionM.jsp">Sesión médica</a>
            <% if(request.getParameter("mensaje")!=null){%>
         <%=request.getParameter("mensaje") %>
         <%}%>
