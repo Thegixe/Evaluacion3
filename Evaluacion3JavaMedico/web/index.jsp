@@ -28,7 +28,7 @@
                     <tr>
                         <td><a href="registroPaciente.jsp">Registrar</a></td>
                         <td><input type="submit" value="Ingresar"/></td>
-                        <input type="hidden" name="accion" value="4"/>
+                        <input type="hidden" name="accion" value="2"/>
                     </tr>
                 </table>
            <% if(request.getParameter("mensaje")!=null){%>

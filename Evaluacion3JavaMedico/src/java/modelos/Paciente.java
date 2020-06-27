@@ -89,7 +89,7 @@ public class Paciente {
         ResultSet rs = conexion.consultarSQL(sentencia);
         return rs.next();
     }
-    public boolean iniciarSesionPaciente() throws SQLException{
+    public boolean iniciarSesion() throws SQLException{
         String sentencia = "select * from paciente where usuario ='"+usuario+"' "
                 + " and password = '"+password+"'";
         ResultSet rs = conexion.consultarSQL(sentencia);

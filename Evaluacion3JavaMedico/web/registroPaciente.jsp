@@ -9,16 +9,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Registro</title>
+        <title>RegistroPaciente</title>
     </head>
     <body><center>
-        <h1>Registro de usuario</h1>
-        <form action="ControlUsuario" method="post">
+        <h1>Registro de Paciente</h1>
+        <form action="ControlPaciente" method="post">
             
                 <table style="border: 1; ">
                     <tr>
                         <td>Usuario</td>
                         <td><input type="text" name="usuario" /></td>
+                    </tr>                    
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="password"/></td>
                     </tr>
                     <tr>
                         <td>Nombre</td>
@@ -29,8 +33,8 @@
                         <td><input type="text" name="apellido" /></td>
                     </tr>
                     <tr>
-                        <td>Password</td>
-                        <td><input type="password" name="password"/></td>
+                        <td>Rut</td>
+                        <td><input type="text" name="rut" /></td>
                     </tr>
                     <tr>
                         <td><a href="index.jsp">Volver</a></td>
