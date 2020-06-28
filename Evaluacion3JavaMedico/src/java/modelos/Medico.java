@@ -106,6 +106,20 @@ public class Medico {
         return respuesta;
     }
     
+    public Medico obtenerMedico(String usuario) throws SQLException, ClassNotFoundException{
+        String sentencia = "select * from medico where usuario='"+usuario+"'";
+        ResultSet rs = conexion.consultarSQL(sentencia);
+        Medico m = new Medico();
+        if(rs.next()){
+            m.setUsuario(rs.getString("usuario"));
+            m.setPassword(rs.getString("password"));
+            m.setNombre(rs.getString("nombre"));
+            m.setApellido(rs.getString("apellido"));
+            m.setEspecialidad(rs.getString("especialidad"));          
+        }
+        return m;
+    }
+    
     
     
 }
