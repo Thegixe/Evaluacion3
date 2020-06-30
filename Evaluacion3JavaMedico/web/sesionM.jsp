@@ -30,6 +30,9 @@
                         <td><input type="submit" value="Ingresar"/></td>
                         <input type="hidden" name="accion" value="2"/>
                     </tr>
+                    <tr>
+                        <td><a href="index.jsp">Volver</a></td>
+                    </tr>    
                 </table>
             <br>
            <% if(request.getParameter("mensaje")!=null){%>

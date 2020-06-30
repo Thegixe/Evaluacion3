@@ -7,6 +7,7 @@ package modelos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -118,6 +119,17 @@ public class Medico {
             m.setEspecialidad(rs.getString("especialidad"));          
         }
         return m;
+    }
+    
+     public ArrayList<Medico> obtenerMedicos() throws SQLException, ClassNotFoundException{
+        String sentencia = "select * from medico order by usuario";
+        ArrayList<Medico> medico = new ArrayList();
+        ResultSet rs = conexion.consultarSQL(sentencia);
+        while(rs.next()){
+            medico.add(new Medico(rs.getString("usuario"),rs.getString("password"),rs.getString("nombre"),
+            rs.getString("apellido"),rs.getString("especialidad")));
+        }
+        return medico;
     }
     
     

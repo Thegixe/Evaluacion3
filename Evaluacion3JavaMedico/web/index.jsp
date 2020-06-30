@@ -12,7 +12,7 @@
         <title>Inicio</title>
     </head>
     <body><center>
-        <h1>Inicio de sesion</h1>
+        <h1>sesion paciente</h1>
         <form action="ControlPaciente" method="post">
             
                 <table style="border: 1; ">
