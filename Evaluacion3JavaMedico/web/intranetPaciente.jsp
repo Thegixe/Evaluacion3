@@ -4,6 +4,8 @@
     Author     : TheGixe
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="modelos.Medico"%>
 <%@page import="modelos.Paciente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,31 +21,31 @@
         
         <h1>Bienvenido <%= p.getNombre()+" "+p.getApellido() %></h1>
         
-        <h2>Registrar Jugador</h2>
-        <form action ="ControlJugador" method="post">
+        <h2>Reservar hora</h2>
+        <form action ="ControlReserva" method="post">
             <table style="border: 1px; border-width: 1px; border-collapse: collapse; border-color:  black;">
                 <tr>
                     <td>ID</td>
                     <td>Paciente</td>
                     <td>Medico</td>
-                    <td>Fecha</td>
+                    <td>Fecha(ej: 2020-02-01)</td>
                     <td>Hora</td>
                     <td>Causa</td>
                     
                 </tr>
                 <tr>
                     <td><input type="text" name="idReserva" value=""/></td> 
-                    <td><input type="text" name="idPaciente" value=""/></td>
+                    <td><input type="text" name="idPaciente" value="<%= p.getNombre()+" "+p.getApellido() %>" readonly="true" /></td>
                     
                     <% try{
-                    Posicion posicion = new Posicion(); 
-                    ArrayList<Posicion> posiciones = posicion.obtenerPosiciones(); 
+                    Medico medico = new Medico(); 
+                    ArrayList<Medico> medicos = medico.obtenerMedicos(); 
                     %>
                 <td>
-                    <select name="idPosicion">
-                        <% for(Posicion po:posiciones){%>
-                        <option value="<%=po.getIdPosicion()%>"> 
-                            <%= po.getNombre()%>
+                    <select name="idMedico">
+                        <% for(Medico me:medicos){%>
+                        <option value="<%=me.getUsuario()%>"> 
+                            <%= me.getNombre()%>+" "+me.getApellido()
                         </option>
                         <% }%>
                     </select>
@@ -55,58 +57,23 @@
                     
                     <td><input type="text" name="fecha" value=""/></td>                    
                     <td><input type="text" name="hora" value=""/></td>                    
-                    <td><input type="text" name="causa" value=""/></td>
+                    <td><input type="text" name="causa" value=""/></td>   
                     
-                    
-                    <% try{
-                    Posicion posicion = new Posicion(); 
-                    ArrayList<Posicion> posiciones = posicion.obtenerPosiciones(); 
-                    %>
-                <td>
-                    <select name="idPosicion">
-                        <% for(Posicion po:posiciones){%>
-                        <option value="<%=po.getIdPosicion()%>"> 
-                            <%= po.getNombre()%>
-                        </option>
-                        <% }%>
-                    </select>
-                </td>
-                <%
-                            }catch(Exception e){ 
-                                out.println(e.getMessage());
-                            } %>
-                            
-                    <td><input type="text" name="sueldo" value=""/></td>        
-                            
-                    
-                    <% try{
-                    Equipo equipo = new Equipo(); 
-                    ArrayList<Equipo> equipos = equipo.obtenerEquipos(); 
-                    %>
-                <td>
-                    <select name="idEquipo">
-                        <% for(Equipo eq:equipos){%>
-                        <option value="<%=eq.getIdEquipo()%>"> 
-                            <%= eq.getNombre()%>
-                        </option>
-                        <% }%>
-                    </select>
-                </td>
-                <%
-                            }catch(Exception e){ 
-                                out.println(e.getMessage());
-                            } %>
-                            
-                    
-                    
-                            
-                    <td><input type="submit" value="Agregar" /> </td>  
+                    <td><input type="submit" value="Agregar reserva" /> </td>  
                    
                 </tr>
             </table>
             <input type="hidden" name="accion" value="1"/>
         </form>
-        <a href="intranet.jsp">Volver</a>
+        <table> 
+            <tr>
+                <td>
+                    <a href="Salir">
+                        <input type="button" value="Cerrar Sesion"/>
+                    </a>
+                </td>
+            </tr>
+        </table>  
         
         
         <% if(request.getParameter("mensaje")!=null){%>
