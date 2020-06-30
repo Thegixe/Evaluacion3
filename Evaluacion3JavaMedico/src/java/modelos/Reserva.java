@@ -5,7 +5,9 @@
  */
 package modelos;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,7 +25,10 @@ public class Reserva {
     private Conexion conexion;
 
     public Reserva() throws ClassNotFoundException, SQLException {        
-    conexion = new Conexion();
+     conexion = new Conexion();
+     paciente = new Paciente();
+     medico = new Medico();
+     estado = new Estado();
     }
 
     public Reserva(String idReserva, Paciente paciente, Medico medico, String fecha, String hora, String causa, Estado estado) throws ClassNotFoundException, SQLException {
@@ -93,7 +98,46 @@ public class Reserva {
         this.estado = estado;
     }
 
+    public String registrar() throws SQLException{
+        if(validarReserva()){
+            return "Id ya existe";
+        }else{
+        String sentencia = "insert into reserva values('"+idReserva+"','"+paciente.getUsuario()+"','"+medico.getUsuario()+"','"+fecha+"','"+hora+"','"+causa+"','"+estado.getIdEstado()+"')";
+        if(conexion.ejecutarSQL(sentencia)==1){
+            return "Reserva registrada";
+        }else{
+            return "No se pudo registrar la Reserva";
+        }
+        }
+    }
     
+    public boolean validarReserva() throws SQLException{
+        String sentencia = "select * from reserva where idReserva='"+idReserva+"'";
+        ResultSet rs = conexion.consultarSQL(sentencia);
+        return rs.next();
+    }
+    
+    public ArrayList<Reserva> obtenerReservasXIdPaciente(String idPaciente) throws SQLException, ClassNotFoundException{
+        String sentencia = "select * from reserva where idPaciente='"+idPaciente+"'";
+        ArrayList<Reserva> reservas = new ArrayList();
+        ResultSet rs = conexion.consultarSQL(sentencia);
+        while(rs.next()){
+            reservas.add(new Reserva(rs.getString("idReserva"),paciente.obtenerPaciente(rs.getString("idPaciente")),medico.obtenerMedico(rs.getString("idMedico")),rs.getString("fecha"),
+                    rs.getString("hora"),rs.getString("causa"),estado.obtenerEstado(rs.getString("idEstado"))));
+        }
+        return reservas;
+    }
+    
+    public ArrayList<Reserva> obtenerReservas() throws SQLException, ClassNotFoundException{
+        String sentencia = "select * from reserva order by idReserva";
+        ArrayList<Reserva> reservas = new ArrayList();
+        ResultSet rs = conexion.consultarSQL(sentencia);
+        while(rs.next()){
+            reservas.add(new Reserva(rs.getString("idReserva"),paciente.obtenerPaciente(rs.getString("idPaciente")),medico.obtenerMedico(rs.getString("idMedico")),rs.getString("fecha"),
+                    rs.getString("hora"),rs.getString("causa"),estado.obtenerEstado(rs.getString("idEstado"))));
+        }
+        return reservas;
+    }
 
     
     

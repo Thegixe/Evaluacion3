@@ -5,6 +5,7 @@
  */
 package modelos;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -43,7 +44,16 @@ public class Estado {
     }
     
     
-    
+    public Estado obtenerEstado(String idEstado) throws SQLException, ClassNotFoundException{
+        String sentencia = "select * from estado where idEstado='"+idEstado+"'";
+        ResultSet rs = conexion.consultarSQL(sentencia);
+        Estado e = new Estado();
+        if(rs.next()){
+            e.setIdEstado(rs.getString("idEstado"));
+            e.setDescripcion(rs.getString("descripcion"));        
+        }
+        return e;
+    }
     
     
     

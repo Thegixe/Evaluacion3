@@ -4,6 +4,7 @@
     Author     : TheGixe
 --%>
 
+<%@page import="modelos.Reserva"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelos.Medico"%>
 <%@page import="modelos.Paciente"%>
@@ -28,14 +29,19 @@
                     <td>ID</td>
                     <td>Paciente</td>
                     <td>Medico</td>
-                    <td>Fecha(ej: 2020-02-01)</td>
+                    <td>Fecha</td>
                     <td>Hora</td>
                     <td>Causa</td>
                     
                 </tr>
                 <tr>
                     <td><input type="text" name="idReserva" value=""/></td> 
-                    <td><input type="text" name="idPaciente" value="<%= p.getNombre()+" "+p.getApellido() %>" readonly="true" /></td>
+                    <td><select name="idPaciente">
+                            <option value="<%= p.getUsuario()%>">
+                            <%= p.getNombre()+" "+p.getApellido() %>
+                            </option>
+                        </select>
+                    </td>
                     
                     <% try{
                     Medico medico = new Medico(); 
@@ -45,7 +51,7 @@
                     <select name="idMedico">
                         <% for(Medico me:medicos){%>
                         <option value="<%=me.getUsuario()%>"> 
-                            <%= me.getNombre()%>+" "+me.getApellido()
+                            <%= me.getNombre()+" "+ me.getApellido()%>
                         </option>
                         <% }%>
                     </select>
@@ -55,8 +61,8 @@
                                 out.println(e.getMessage());
                             } %>
                     
-                    <td><input type="text" name="fecha" value=""/></td>                    
-                    <td><input type="text" name="hora" value=""/></td>                    
+                    <td><input type="date" name="fecha" value=""/></td>                    
+                    <td><input type="time" name="hora" value=""/></td>                    
                     <td><input type="text" name="causa" value=""/></td>   
                     
                     <td><input type="submit" value="Agregar reserva" /> </td>  
@@ -68,12 +74,45 @@
         <table> 
             <tr>
                 <td>
-                    <a href="Salir">
+                    <a href="SalirP">
                         <input type="button" value="Cerrar Sesion"/>
                     </a>
                 </td>
             </tr>
         </table>  
+                            
+        <br>
+        <h2>Reservas realizadas</h2>
+        
+        <table border="1"  >
+                <tr boder ="2">
+                    <td>ID</td>
+                    <td>Paciente</td>
+                    <td>Medico</td>
+                    <td>Fecha</td>
+                    <td>Hora</td>
+                    <td>Causa</td>
+                    <td>Estado de Reserva</td>
+                    
+                </tr>
+                
+                <% ArrayList<Reserva> reservas = new Reserva().obtenerReservasXIdPaciente(p.getUsuario());
+               
+            for(Reserva r:reservas){
+            %>
+            <tr border="1">
+                <td><%= r.getIdReserva()%></td>
+                <td><%= r.getPaciente().getNombre()+" "+r.getPaciente().getApellido()%></td>
+                <td><%= r.getMedico().getNombre()+" "+r.getMedico().getApellido()%></td>
+                <td><%= r.getFecha()%></td>
+                <td><%= r.getHora()%></td>
+                <td><%= r.getCausa()%></td>
+                <td><%= r.getEstado().getDescripcion() %></td>
+               
+            </tr>
+            <% } %>
+            
+            </table>                 
         
         
         <% if(request.getParameter("mensaje")!=null){%>

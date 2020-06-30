@@ -23,6 +23,8 @@ public class Atencion {
 
     public Atencion() throws ClassNotFoundException, SQLException {
      conexion = new Conexion();
+     paciente = new Paciente();
+     medico = new Medico();
     }
 
     public Atencion(String idAtencion, Paciente paciente, Medico medico, String fecha, String hora, String diagnostico, String receta) throws ClassNotFoundException, SQLException {
