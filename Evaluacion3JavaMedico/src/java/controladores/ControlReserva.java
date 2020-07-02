@@ -42,7 +42,7 @@ public class ControlReserva extends HttpServlet {
             break;
             case "2": aceptar(request,response);
             break;
-            case "3": //eliminar(request,response);
+            case "3": rechazar(request,response);
             break;
         }
         }
@@ -89,6 +89,25 @@ public class ControlReserva extends HttpServlet {
                                     getString("causa",request),
                                     e.obtenerEstado(idEsta));
              response.sendRedirect("intranetMedico.jsp?mensaje="+r.aceptar());
+         } catch (Exception e) {
+                response.sendRedirect("intranetMedico.jsp?mensaje="+e.getMessage());
+            }
+    }
+     
+     private void rechazar(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        try {
+            Paciente p = new Paciente();
+            Medico m = new Medico();
+            Estado e = new Estado();
+            String idEsta = "2";
+            Reserva r = new Reserva(getString("idReserva",request),
+                                    p.obtenerPaciente(getString("idPaciente",request)),
+                                    m.obtenerMedico(getString("idMedico",request)),
+                                    getString("fecha",request),
+                                    getString("hora",request),
+                                    getString("causa",request),
+                                    e.obtenerEstado(idEsta));
+             response.sendRedirect("intranetMedico.jsp?mensaje="+r.rechazar());
          } catch (Exception e) {
                 response.sendRedirect("intranetMedico.jsp?mensaje="+e.getMessage());
             }

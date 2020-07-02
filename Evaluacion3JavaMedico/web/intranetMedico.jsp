@@ -52,15 +52,23 @@
                
                 <td>
                     <a href="aceptar.jsp?idReserva=<%=r.getIdReserva()%>">
-                        <input type="button" value="abrir aceptar"/>
+                        <input type="button" value="Aceptar"/>
                     </a>
                 </td>
                 
                 <td>
                     <a href="rechazar.jsp?idReserva=<%=r.getIdReserva()%>">
-                        <input type="button" value="abrir aceptar"/>
+                        <input type="button" value="Rechazar"/>
                     </a>
                 </td>
+                
+                <td>
+                    <a href="atender.jsp?idReserva=<%=r.getIdReserva()%>?estado=<%= r.getEstado().getDescripcion() %>">
+                        <input type="button" value="Atender"/>
+                    </a>
+                </td>
+                
+                
                 
                 
                 

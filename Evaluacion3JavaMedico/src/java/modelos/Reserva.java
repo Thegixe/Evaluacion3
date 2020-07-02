@@ -183,6 +183,21 @@ public class Reserva {
             return "La reserva no existe";
         }
     }
+    
+    public String rechazar() throws SQLException{
+        if(validarReserva()){
+            String sentencia = "update reserva set idEstado = '"+estado.getIdEstado()+"'"
+                    
+                    + "where idReserva = '"+idReserva+"'";
+        if(conexion.ejecutarSQL(sentencia)==1){
+            return "Reserva rechazada";
+        }else{
+            return "No se pudo rechazar la reserva";
+        }
+        }else{
+            return "La reserva no existe";
+        }
+    }
 
     
     
