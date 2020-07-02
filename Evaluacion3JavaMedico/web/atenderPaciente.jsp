@@ -1,6 +1,6 @@
 <%-- 
-    Document   : intranetMedico
-    Created on : 27-jun-2020, 19:24:19
+    Document   : atenderPaciente
+    Created on : 02-jul-2020, 19:42:29
     Author     : TheGixe
 --%>
 
@@ -12,16 +12,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>intranet medico</title>
+        <title>JSP Page</title>
     </head>
+    
     <% if(session.getAttribute("medico")!=null){ 
         Medico m =(Medico) session.getAttribute("medico");%>
     <body>
     <center>
-        <h1>Bienvenido <%= m.getNombre()+" "+m.getApellido() %></h1>
-        
-        
-        
         
         <h2>Reservas</h2>
         
@@ -37,7 +34,7 @@
                     
                 </tr>
                 
-                <% ArrayList<Reserva> reservas = new Reserva().obtenerReservasXIdMedico(m.getUsuario());
+                <% ArrayList<Reserva> reservas = new Reserva().obtenerReservasXIdEstado(m.getUsuario());
                
             for(Reserva r:reservas){
             %>
@@ -49,54 +46,25 @@
                 <td><%= r.getHora()%></td>
                 <td><%= r.getCausa()%></td>
                 <td><%= r.getEstado().getDescripcion() %></td>
-               
-                <td>
-                    <a href="aceptar.jsp?idReserva=<%=r.getIdReserva()%>">
-                        <input type="button" value="Aceptar"/>
-                    </a>
-                </td>
                 
                 <td>
-                    <a href="rechazar.jsp?idReserva=<%=r.getIdReserva()%>">
-                        <input type="button" value="Rechazar"/>
+                    <a href="atender.jsp?estado=<%= r.getEstado().getIdEstado()%>">
+                        <input type="button" value="Atender"/>
                     </a>
-                </td>  
+                </td>
                 
                  </tr>
             <% } %>
             
-            </table>    
-            
-           
-        <table> 
-            <tr>
-                <td>
-                    <a href="atenderPaciente.jsp">
-                        <input type="button" value="Atender pacientes"/>
-                    </a>
-                </td>
-            </tr>
-        </table>  
-          
-            
-            <table> 
-            <tr>
-                <td>
-                    <a href="SalirM">
-                        <input type="button" value="Cerrar Sesion"/>
-                    </a>
-                </td>
-            </tr>
-        </table>  
-       
-            <% if(request.getParameter("mensaje")!=null){%>
-        <%=request.getParameter("mensaje") %>
-        <%}%>       
+            </table>  
         
         
-        </center>
+        
+        
+    </center>        
     </body>
     <% }else{
     response.sendRedirect("index.jsp?mensaje=acceso denegado");
     }%>
+    
 </html>

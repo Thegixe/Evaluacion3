@@ -11,7 +11,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <% if(session.getAttribute("medico")!=null){ 
+      %>
+        
     <body>
-        <h1>Hello World!</h1>
+     <center>
+        
+         <h2>hola</h2>
+     </center>      
     </body>
+    
+    <% }else{
+    response.sendRedirect("index.jsp?mensaje=acceso denegado");
+    }%>
 </html>
