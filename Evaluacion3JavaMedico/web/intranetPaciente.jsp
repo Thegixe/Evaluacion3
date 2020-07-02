@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>intranet paciente</title>
     </head>
     <% if(session.getAttribute("paciente")!=null){ 
         Paciente p =(Paciente) session.getAttribute("paciente");%>
