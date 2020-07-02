@@ -1,6 +1,6 @@
 <%-- 
-    Document   : aceptarR
-    Created on : 02-jul-2020, 18:34:33
+    Document   : aceptar
+    Created on : 02-jul-2020, 19:03:15
     Author     : TheGixe
 --%>
 
@@ -8,7 +8,6 @@
 <%@page import="modelos.Medico"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% if(session.getAttribute("usuario")!=null){%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

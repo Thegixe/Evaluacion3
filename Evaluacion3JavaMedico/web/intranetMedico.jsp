@@ -50,20 +50,38 @@
                 <td><%= r.getCausa()%></td>
                 <td><%= r.getEstado().getDescripcion() %></td>
                
-                <td><a href="aceptarR.jps?idReserva=<%=r.getIdReserva()%>">
-                        <input type="button" value="Aceptar" />
-                    </a>
-                        </td>
-                        <td>
-                    <a href="rechazarR.jps?idReserva=<%=r.getIdReserva()%>">
-                        <input type="button" value="Rechazar" />
+                <td>
+                    <a href="aceptar.jsp?idReserva=<%=r.getIdReserva()%>">
+                        <input type="button" value="abrir aceptar"/>
                     </a>
                 </td>
+                
+                <td>
+                    <a href="rechazar.jsp?idReserva=<%=r.getIdReserva()%>">
+                        <input type="button" value="abrir aceptar"/>
+                    </a>
+                </td>
+                
+                
                 
             </tr>
             <% } %>
             
-            </table>                 
+            </table>    
+            
+           
+                
+          
+            
+            <table> 
+            <tr>
+                <td>
+                    <a href="SalirM">
+                        <input type="button" value="Cerrar Sesion"/>
+                    </a>
+                </td>
+            </tr>
+        </table>  
        
             <% if(request.getParameter("mensaje")!=null){%>
         <%=request.getParameter("mensaje") %>
