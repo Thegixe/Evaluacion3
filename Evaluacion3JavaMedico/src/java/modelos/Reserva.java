@@ -139,6 +139,17 @@ public class Reserva {
         return reservas;
     }
     
+    public ArrayList<Reserva> obtenerReservasXIdEstado(String idMedico) throws SQLException, ClassNotFoundException{
+        String sentencia = "select * from reserva where idEstado='"+1+"' and idMedico='"+idMedico+"'";
+        ArrayList<Reserva> reservas = new ArrayList();
+        ResultSet rs = conexion.consultarSQL(sentencia);
+        while(rs.next()){
+            reservas.add(new Reserva(rs.getString("idReserva"),paciente.obtenerPaciente(rs.getString("idPaciente")),medico.obtenerMedico(rs.getString("idMedico")),rs.getString("fecha"),
+                    rs.getString("hora"),rs.getString("causa"),estado.obtenerEstado(rs.getString("idEstado"))));
+        }
+        return reservas;
+    }
+    
     
     public ArrayList<Reserva> obtenerReservas() throws SQLException, ClassNotFoundException{
         String sentencia = "select * from reserva order by idReserva";
