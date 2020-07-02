@@ -17,13 +17,13 @@
     <% if(session.getAttribute("medico")!=null){ 
         Medico m =(Medico) session.getAttribute("medico");%>
     <body>
-        
+    <center>
         <h1>Bienvenido <%= m.getNombre()+" "+m.getApellido() %></h1>
         
         
         
         
-        <h2>Reservas realizadas</h2>
+        <h2>Reservas</h2>
         
         <table border="1"  >
                 <tr boder ="2">
@@ -37,7 +37,7 @@
                     
                 </tr>
                 
-                <% ArrayList<Reserva> reservas = new Reserva().obtenerReservasXIdPaciente(m.getUsuario());
+                <% ArrayList<Reserva> reservas = new Reserva().obtenerReservasXIdMedico(m.getUsuario());
                
             for(Reserva r:reservas){
             %>
@@ -50,12 +50,12 @@
                 <td><%= r.getCausa()%></td>
                 <td><%= r.getEstado().getDescripcion() %></td>
                
-                <td><a href="aceptarR?idReserva=<%=r.getIdReserva()%>">
+                <td><a href="aceptarR.jps?idReserva=<%=r.getIdReserva()%>">
                         <input type="button" value="Aceptar" />
                     </a>
                         </td>
                         <td>
-                    <a href="rechazarR?idReserva=<%=r.getIdReserva()%>">
+                    <a href="rechazarR.jps?idReserva=<%=r.getIdReserva()%>">
                         <input type="button" value="Rechazar" />
                     </a>
                 </td>
@@ -64,11 +64,13 @@
             <% } %>
             
             </table>                 
+       
+            <% if(request.getParameter("mensaje")!=null){%>
+        <%=request.getParameter("mensaje") %>
+        <%}%>       
         
         
-        
-        
-        
+        </center>
     </body>
     <% }else{
     response.sendRedirect("index.jsp?mensaje=acceso denegado");

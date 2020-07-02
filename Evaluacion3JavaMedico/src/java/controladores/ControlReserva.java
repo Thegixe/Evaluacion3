@@ -40,7 +40,7 @@ public class ControlReserva extends HttpServlet {
         switch(accion){
             case "1": registrar(request,response);
             break;
-            case "2": //modificar(request,response);
+            case "2": aceptar(request,response);
             break;
             case "3": //eliminar(request,response);
             break;
@@ -75,6 +75,24 @@ public class ControlReserva extends HttpServlet {
         return request.getParameter(nombre);
     }
     
+     private void aceptar(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        try {
+            Paciente p = new Paciente();
+            Medico m = new Medico();
+            Estado e = new Estado();
+            String idEsta = "1";
+            Reserva r = new Reserva(getString("idReserva",request),
+                                    p.obtenerPaciente(getString("idPaciente",request)),
+                                    m.obtenerMedico(getString("idMedico",request)),
+                                    getString("fecha",request),
+                                    getString("hora",request),
+                                    getString("causa",request),
+                                    e.obtenerEstado(idEsta));
+             response.sendRedirect("intranetMedico.jsp?mensaje="+r.aceptar());
+         } catch (Exception e) {
+                response.sendRedirect("intranetMedico.jsp?mensaje="+e.getMessage());
+            }
+    }
     
     
     

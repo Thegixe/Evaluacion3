@@ -150,6 +150,39 @@ public class Reserva {
         }
         return reservas;
     }
+    
+    public Reserva obtenerReserva(String idReserva) throws SQLException, ClassNotFoundException{
+        String sentencia = "select * from reserva where idReserva='"+idReserva+"'";
+        ResultSet rs = conexion.consultarSQL(sentencia);
+        Reserva r = new Reserva();
+        if(rs.next()){
+            r.setIdReserva(rs.getString("idReserva"));
+            r.setPaciente(paciente.obtenerPaciente(rs.getString("idPaciente")));
+            r.setMedico(medico.obtenerMedico(rs.getString("idMedico")));
+            r.setFecha(rs.getString("fecha"));
+            r.setHora(rs.getString("hora"));
+            r.setCausa(rs.getString("causa"));
+            r.setEstado(estado.obtenerEstado(rs.getString("idEstado")));
+                     
+        }
+        return r;
+    }
+    
+    
+    public String aceptar() throws SQLException{
+        if(validarReserva()){
+            String sentencia = "update reserva set idEstado = '"+estado.getIdEstado()+"'"
+                    
+                    + "where idReserva = '"+idReserva+"'";
+        if(conexion.ejecutarSQL(sentencia)==1){
+            return "Reserva aceptada";
+        }else{
+            return "No se pudo aceptar la reserva";
+        }
+        }else{
+            return "La reserva no existe";
+        }
+    }
 
     
     
