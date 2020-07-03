@@ -36,6 +36,7 @@
                 </tr>
                 <tr>
                     <td><input type="text" name="idReserva" value=""/></td> 
+                    
                     <td><select name="idPaciente">
                             <option value="<%= p.getUsuario()%>">
                             <%= p.getNombre()+" "+p.getApellido() %>

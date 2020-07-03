@@ -4,6 +4,7 @@
     Author     : TheGixe
 --%>
 
+<%@page import="modelos.Reserva"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,12 +13,59 @@
         <title>JSP Page</title>
     </head>
     <% if(session.getAttribute("medico")!=null){ 
+        String idReserva = request.getParameter("idReserva").trim();
+      Reserva r = new Reserva().obtenerReserva(idReserva);
       %>
         
     <body>
      <center>
         
-         <h2>hola</h2>
+         
+         <form action ="ControlAtencion" method="post">
+            <table style="border: 1px; border-width: 1px; border-collapse: collapse; border-color:  black;">
+                <tr>
+                    <td>ID</td>
+                    <td>Paciente</td>
+                    <td>Medico</td>
+                    <td>Fecha</td>
+                    <td>Hora</td>
+                    <td>Diagnostico</td>
+                    <td>Receta</td>
+                    
+                </tr>
+                <tr>
+                
+                    <td><input type="text" name="idAtencion" value=""/></td> 
+                    
+                     <td><select name="idPaciente">
+                            <option value="<%= r.getPaciente().getUsuario()%>">
+                            <%=r.getPaciente().getNombre()+" "+r.getPaciente().getApellido()%>
+                            </option>
+                        </select>
+                    </td>
+                    
+                    <td><select name="idMedico">
+                            <option value="<%= r.getMedico().getUsuario()%>">
+                            <%=r.getMedico().getNombre()+" "+r.getMedico().getApellido()%>
+                            </option>
+                        </select>
+                    </td>
+                    
+                    <td><input type="date" name="fecha" value=""/></td>                    
+                    <td><input type="time" name="hora" value=""/></td>                    
+                    <td><input type="text" name="diagnostico" value=""/></td>                   
+                    <td><input type="text" name="receta" value=""/></td>   
+                    
+                    <td><input type="submit" value="Registrar atención" /> </td>  
+                   
+                </tr>
+            </table>
+            <input type="hidden" name="accion" value="1"/>
+        </form>
+         
+         
+         
+         
      </center>      
     </body>
     

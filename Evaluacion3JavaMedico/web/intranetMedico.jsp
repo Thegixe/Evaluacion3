@@ -20,6 +20,19 @@
     <center>
         <h1>Bienvenido <%= m.getNombre()+" "+m.getApellido() %></h1>
         
+        <br>
+           
+        <table> 
+            <tr>
+                <td>
+                    <a href="atenderPaciente.jsp">
+                        <input type="button" value="Atender pacientes"/>
+                    </a>
+                </td>
+            </tr>
+        </table>  
+        <br>
+        
         
         
         
@@ -65,21 +78,11 @@
                  </tr>
             <% } %>
             
-            </table>    
+        </table>               
+        
+            <br>
             
-           
         <table> 
-            <tr>
-                <td>
-                    <a href="atenderPaciente.jsp">
-                        <input type="button" value="Atender pacientes"/>
-                    </a>
-                </td>
-            </tr>
-        </table>  
-          
-            
-            <table> 
             <tr>
                 <td>
                     <a href="SalirM">

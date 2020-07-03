@@ -4,6 +4,7 @@
     Author     : TheGixe
 --%>
 
+<%@page import="modelos.Atencion"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelos.Reserva"%>
 <%@page import="modelos.Medico"%>
@@ -48,7 +49,7 @@
                 <td><%= r.getEstado().getDescripcion() %></td>
                 
                 <td>
-                    <a href="atender.jsp?estado=<%= r.getEstado().getIdEstado()%>">
+                    <a href="atender.jsp?idReserva=<%= r.getIdReserva()%>">
                         <input type="button" value="Atender"/>
                     </a>
                 </td>
@@ -56,7 +57,52 @@
                  </tr>
             <% } %>
             
-            </table>  
+            </table> 
+            
+            <br>
+            <br>
+            <h2>Atenciones realizadas</h2>
+        
+        <table border="1"  >
+                <tr boder ="2">
+                    <td>ID</td>
+                    <td>Paciente</td>
+                    <td>Medico</td>
+                    <td>Fecha</td>
+                    <td>Hora</td>
+                    <td>Diagnostico</td>
+                    <td>Receta</td>
+                    
+                </tr>
+                
+                <% ArrayList<Atencion> atenciones = new Atencion().obtenerAtencionesXIdMedico(m.getUsuario());
+               
+            for(Atencion a:atenciones){
+            %>
+            <tr border="1">
+                <td><%= a.getIdAtencion()%></td>
+                <td><%= a.getPaciente().getNombre()+" "+a.getPaciente().getApellido()%></td>
+                <td><%= a.getMedico().getNombre()+" "+a.getMedico().getApellido()%></td>
+                <td><%= a.getFecha()%></td>
+                <td><%= a.getHora()%></td>
+                <td><%= a.getDiagnostico()%></td>
+                <td><%= a.getReceta()%></td>
+                
+                 </tr>
+            <% } %>            
+            </table> 
+            
+            <br>
+            
+        <table> 
+            <tr>
+                <td>
+                    <a href="intranetMedico.jsp">
+                        <input type="button" value="Volver"/>
+                    </a>
+                </td>
+            </tr>
+        </table>  
         
         
         

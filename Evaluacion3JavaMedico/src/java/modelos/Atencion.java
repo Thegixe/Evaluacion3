@@ -5,7 +5,9 @@
  */
 package modelos;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -94,7 +96,35 @@ public class Atencion {
         this.receta = receta;
     }
     
+    public String registrar() throws SQLException{
+        if(validarAtencion()){
+            return "Id ya existe";
+        }else{
+        String sentencia = "insert into atencion values('"+idAtencion+"','"+paciente.getUsuario()+"','"+medico.getUsuario()+"','"+fecha+"','"+hora+"','"+diagnostico+"','"+receta+"')";
+        if(conexion.ejecutarSQL(sentencia)==1){
+            return "Atencion registrada";
+        }else{
+            return "No se pudo registrar la atencion";
+        }
+        }
+    }
     
+    public boolean validarAtencion() throws SQLException{
+        String sentencia = "select * from atencion where idAtencion='"+idAtencion+"'";
+        ResultSet rs = conexion.consultarSQL(sentencia);
+        return rs.next();
+    }
+    
+    public ArrayList<Atencion> obtenerAtencionesXIdMedico(String idMedico) throws SQLException, ClassNotFoundException{
+        String sentencia = "select * from atencion where idMedico='"+idMedico+"'";
+        ArrayList<Atencion> atenciones = new ArrayList();
+        ResultSet rs = conexion.consultarSQL(sentencia);
+        while(rs.next()){
+            atenciones.add(new Atencion(rs.getString("idAtencion"),paciente.obtenerPaciente(rs.getString("idPaciente")),medico.obtenerMedico(rs.getString("idMedico")),rs.getString("fecha"),
+                    rs.getString("hora"),rs.getString("diagnostico"),rs.getString("receta")));
+        }
+        return atenciones;
+    }
     
     
     
