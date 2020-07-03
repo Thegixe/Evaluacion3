@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelos.Atencion;
+import modelos.Estado;
 import modelos.Medico;
 import modelos.Paciente;
+import modelos.Reserva;
 
 /**
  *
@@ -54,6 +56,8 @@ public class ControlAtencion extends HttpServlet {
         try{
             Paciente p = new Paciente();
             Medico m = new Medico();
+            Estado e = new Estado();
+            String idEsta = "4";
             Atencion a = new Atencion(getString("idAtencion",request),
                                     p.obtenerPaciente(getString("idPaciente",request)),
                                     m.obtenerMedico(getString("idMedico",request)),
@@ -61,7 +65,18 @@ public class ControlAtencion extends HttpServlet {
                                     getString("hora",request),
                                     getString("diagnostico",request),
                                     getString("receta",request));
+            
              response.sendRedirect("atenderPaciente.jsp?mensaje="+a.registrar());
+             
+            Reserva r = new Reserva(getString("idReserva",request),
+                                    p.obtenerPaciente(getString("idPaciente",request)),
+                                    m.obtenerMedico(getString("idMedico",request)),
+                                    getString("fecha",request),
+                                    getString("hora",request),
+                                    getString("causa",request),
+                                    e.obtenerEstado(idEsta));
+             r.atender();           
+            
         
          } catch (Exception e) {
                 response.sendRedirect("intranetPaciente.jsp?mensaje="+e.getMessage());

@@ -129,7 +129,7 @@ public class Reserva {
     }
     
     public ArrayList<Reserva> obtenerReservasXIdMedico(String idMedico) throws SQLException, ClassNotFoundException{
-        String sentencia = "select * from reserva where idMedico='"+idMedico+"'";
+        String sentencia = "select * from reserva where idMedico='"+idMedico+"' and idEstado<'"+4+"'";
         ArrayList<Reserva> reservas = new ArrayList();
         ResultSet rs = conexion.consultarSQL(sentencia);
         while(rs.next()){
@@ -193,6 +193,15 @@ public class Reserva {
         }else{
             return "La reserva no existe";
         }
+    }
+    
+    public String atender() throws SQLException{
+     String sentencia = "update reserva set idEstado = '"+estado.getIdEstado()+"'"
+                    
+                    + "where idReserva = '"+idReserva+"'";
+        conexion.ejecutarSQL(sentencia);
+        
+        return "atendido";
     }
     
     public String rechazar() throws SQLException{

@@ -21,7 +21,7 @@
     <body>
     <center>
         
-        <h2>Reservas</h2>
+        <h2>Reservas Aceptadas</h2>
         
         <table border="1"  >
                 <tr boder ="2">

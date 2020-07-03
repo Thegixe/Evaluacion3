@@ -20,12 +20,14 @@
     <body>
      <center>
         
-         
+         <h1> Registrar Atencion</h1>
          <form action ="ControlAtencion" method="post">
+             
             <table style="border: 1px; border-width: 1px; border-collapse: collapse; border-color:  black;">
                 <tr>
                     <td>ID</td>
                     <td>Paciente</td>
+                    <td>Causa</td>
                     <td>Medico</td>
                     <td>Fecha</td>
                     <td>Hora</td>
@@ -44,6 +46,8 @@
                         </select>
                     </td>
                     
+                    <td><input type="text" name="causa" value="<%= r.getCausa()%>" readonly="true"/></td>  
+                    
                     <td><select name="idMedico">
                             <option value="<%= r.getMedico().getUsuario()%>">
                             <%=r.getMedico().getNombre()+" "+r.getMedico().getApellido()%>
@@ -51,8 +55,8 @@
                         </select>
                     </td>
                     
-                    <td><input type="date" name="fecha" value=""/></td>                    
-                    <td><input type="time" name="hora" value=""/></td>                    
+                    <td><input type="date" name="fecha" value="<%= r.getFecha()%>" readonly="true"/></td>                    
+                    <td><input type="time" name="hora" value="<%= r.getHora()%>" readonly="true"/></td>                    
                     <td><input type="text" name="diagnostico" value=""/></td>                   
                     <td><input type="text" name="receta" value=""/></td>   
                     
@@ -60,11 +64,20 @@
                    
                 </tr>
             </table>
+            <input type="hidden" name="idReserva" value="<%= r.getIdReserva()%>" />        
             <input type="hidden" name="accion" value="1"/>
         </form>
          
-         
-         
+        <br>
+         <table> 
+            <tr>
+                <td>
+                    <a href="atenderPaciente.jsp">
+                        <input type="button" value="Volver"/>
+                    </a>
+                </td>
+            </tr>
+        </table> 
          
      </center>      
     </body>
